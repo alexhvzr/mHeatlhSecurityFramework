@@ -8,35 +8,23 @@
 /*
  Module Name:
  
- FiltrCtx.c
+ ViewController.swift
  
  Abstract:
  
- This module provides three routines that allow filesystem filter drivers
- to associate state with FILE_OBJECTs -- for filesystems which support
- an extended FSRTL_COMMON_HEADER with FsContext.
+ This module provides methods for validating a password and it's srength.
+ Storing private data into the encrypted keychain API.
+ Using biometirc authentication to verify the user to get access to the stored variables.
  
- These routines depend on fields (FastMutext and FilterContexts)
- added at the end of FSRTL_COMMON_HEADER in NT 5.0.
+ Methods:
  
- Filesystems should set FSRTL_FLAG2_SUPPORTS_FILTER_CONTEXTS if
- these new fields are supported.  They must also initialize the mutex
- and list head.
+ textFieldShouldReturn          - What happens when the user inputs something into a text field
+ passwordVerificationButton     - Button, calls validate on the text passed into the password field.
+ getKeychainValues              - Button that get's the encypted data in the keychain if set.
+ validate                       - Verifies the passwords strength, won't store if "weak"
+ viewDidLoad                    - Loads the application interfaces and calls anything that comes after load.
+ setupView                      - Defines the setup view of text. Mainly hides text until error / success.
  
- Filter drivers must use a common header for the context they wish to
- associate with a file object:
- 
- FSRTL_FILTER_CONTEXT:
- LIST_ENTRY  Links;
- PVOID       OwnerId;
- PVOID       InstanceId;
- 
- The OwnerId is a bit pattern unique to each filter driver
- (e.g. the device object).
- 
- The InstanceId is used to specify a particular instance of the context
- data owned by a filter driver (e.g. the file object).
-
  */
 
 
