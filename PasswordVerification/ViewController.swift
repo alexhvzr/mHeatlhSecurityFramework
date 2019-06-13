@@ -112,12 +112,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
                 keychain.set(textField.text!, forKey: "password")
                 
+                
 //                print(keychain.get("password"))
                 
                 // This if statemeent is checking if the phone has either face or touch ID.
                 // Any iOS or macOS before this didn't have either of those functionalities.
                 if #available(iOS 8.0, macOS 10.12.1, *){
-                    
+                        self.PasswordFromKeychain.text = keychain.get("password")
                 }
                 emailTextField.becomeFirstResponder()
               
@@ -184,14 +185,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             self.successLabel.textColor = UIColor.red
                             self.successLabel.isHidden = false
                             self.successLabel.text = "Couldn't Authenicate"
+                            
                         }
                     }
                 }
             } else {
                 // Could not evaluate policy; look at authError and present an appropriate message to user
-                self.successLabel.textColor = UIColor.black
+                self.successLabel.textColor = UIColor.red
                 self.successLabel.isHidden = false
                 successLabel.text = "Could not evaluate policy."
+                print(authError.debugDescription)
             }
         } else {
             // Fallback on earlier versions
@@ -202,7 +205,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         
     
-        self.PasswordFromKeychain.text = keychain.get("password")
+//        self.PasswordFromKeychain.text = keychain.get("password")
 
     }
     
